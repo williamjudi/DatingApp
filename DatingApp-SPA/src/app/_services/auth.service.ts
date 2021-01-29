@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +30,14 @@ export class AuthService {
           localStorage.setItem('token', user.token);
           localStorage.setItem('mainPhotoUrl', user.photoUrl);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          //this.currentPhotoUrl = user.photoUrl;
           this.changeMemberPhoto(user.photoUrl);
         }
       })
     );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   loggedIn() {
