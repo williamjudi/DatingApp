@@ -12,7 +12,7 @@ namespace DatingApp.API.Dtos
         public string PublicId { get; set; }
 
         public PhotoForCreationDto()
-        {   
+        {
             DateAdded = DateTime.Now;
         }
     }

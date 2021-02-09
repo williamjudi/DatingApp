@@ -14,7 +14,7 @@ namespace DatingApp.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099");
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
             modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
                 {
@@ -52,8 +52,6 @@ namespace DatingApp.API.Migrations
                     b.Property<DateTime>("Created");
 
                     b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<string>("Email");
 
                     b.Property<string>("Gender");
 
