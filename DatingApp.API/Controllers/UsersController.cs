@@ -28,7 +28,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -77,7 +77,7 @@ namespace DatingApp.API.Controllers
             throw new Exception($"Updating user {id} failed on save");
         }
 
-        [HttpPost("{id}/Like/{recipientId}")]
+        [HttpPost("{id}/like/{recipientId}")]
         public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -86,14 +86,10 @@ namespace DatingApp.API.Controllers
             var like = await _repo.GetLike(id, recipientId);
 
             if (like != null)
-            {
                 return BadRequest("You already like this user");
-            }
-
+            
             if (await _repo.GetUser(recipientId) == null)
-            {
                 return NotFound();
-            }
 
             like = new Like
             {
@@ -104,11 +100,9 @@ namespace DatingApp.API.Controllers
             _repo.Add<Like>(like);
 
             if (await _repo.SaveAll())
-            {
                 return Ok();
-            }
-
-            return BadRequest("Faild to like user");
+            
+            return BadRequest("Failed to like user");
         }
     }
 }
